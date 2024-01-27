@@ -1,0 +1,46 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.function.*;
+import java.util.regex.*;
+import java.util.stream.*;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toList;
+
+public class Solution {
+    public static int sumOfDigits(int digit){
+        int sum = 0;
+        while(digit>0){
+            sum += digit % 10;
+            digit = digit/10;
+        }
+        return sum;
+    }
+    
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+
+        int n = Integer.parseInt(bufferedReader.readLine().trim());
+        int sum = sumOfDigits(n);
+        int best_divisor = n;
+        for(int i =1;i<(n/2)+1;i++){
+            if( n % i ==0){
+                int sum_new = sumOfDigits(i);
+                if(sum_new > sum){
+                    sum = sum_new; 
+                    best_divisor = i;
+                }
+                if(sum_new == sum ){
+                    best_divisor = Math.min(best_divisor, i);
+                }
+            }
+        }
+        System.out.println(best_divisor);
+        
+
+        bufferedReader.close();
+    }
+}
