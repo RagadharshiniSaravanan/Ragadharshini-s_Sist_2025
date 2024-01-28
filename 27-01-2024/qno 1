@@ -1,0 +1,36 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.function.*;
+import java.util.regex.*;
+import java.util.stream.*;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toList;
+
+class Result {
+ public static String timeConversion(String s) {
+     String[] timeComponents=s.split(":");
+        int hours = Integer.parseInt(timeComponents[0]);
+        int minutes = Integer.parseInt(timeComponents[1]);
+        int seconds = Integer.parseInt(timeComponents[2].substring(0, 2));
+
+        
+        boolean isPM = s.toUpperCase().endsWith("PM");
+
+        if (!isPM && hours == 12) {
+            hours = 0;
+        } else if (isPM && hours != 12) {
+            hours += 12;
+        }
+
+       
+        String militaryTime = String.format("%02d:%02d:%02d", hours, minutes, seconds);
+
+        return militaryTime;
+
+    }
+
+}
